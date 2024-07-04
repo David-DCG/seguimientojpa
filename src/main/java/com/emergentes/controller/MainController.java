@@ -58,8 +58,20 @@ public class MainController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id;
-        id = Integer.parseInt(request.getParameter("id"));
+
+        //int id;
+        //id = Integer.parseInt(request.getParameter("id"));
+        String idParameter = request.getParameter("id");
+        int id = 0; // Valor predeterminado o error
+        if (!idParameter.isEmpty()) {
+            try {
+                id = Integer.parseInt(idParameter);
+            } catch (NumberFormatException e) {
+                // Manejar la excepción si el parámetro "id" no es un número válido
+                // Puedes imprimir un mensaje de error o realizar otra acción aquí
+                e.printStackTrace(); // Este es solo un ejemplo, puedes manejar el error de otra manera
+            }
+        }
         String nombre = request.getParameter("nombre");
         String apellidos = request.getParameter("apellidos");
         String email = request.getParameter("email");
